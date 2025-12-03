@@ -1,0 +1,218 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |				
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  10                                   	
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      phaseProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+type    populationBalanceMultiphaseSystem;
+phases (air water);
+populationBalances  (bubbles);
+
+air
+{
+    type            pureIsothermalPhaseModel;
+
+    diameterModel   velocityGroup;
+
+    velocityGroupCoeffs
+    {
+        populationBalance    bubbles;
+
+        shapeModel           spherical;
+        //set according to inlet condition
+        sizeGroups
+        (
+            f1 {dSph  3e-3; value 0;}
+            f2 {dSph  4.25e-3; value 0;}
+            f3 {dSph  4.75e-3; value 0;}
+            f4 {dSph  5.25e-3; value 0;}
+            f5 {dSph  5.75e-3; value 0;}
+            f6 {dSph  6.25e-3; value 0;}
+            f7 {dSph  6.75e-3; value 0;}
+            f8 {dSph  7.25e-3; value 0;}
+            f9 {dSph  7.75e-3; value 0;}
+            f10 {dSph  8.25e-3; value 0;}
+            f11 {dSph  8.75e-3; value 0;}
+            f12 {dSph  9.25e-3; value 0;}
+            f13 {dSph  9.75e-3; value 0;}
+            f14 {dSph  10.25e-3; value 0;}
+            f15 {dSph  10.75e-3; value 0;}
+            f16 {dSph  11.25e-3; value 0;}
+            f17 {dSph  11.75e-3; value 0;}
+            f18 {dSph  13e-3; value 0;}
+        );
+    }
+    residualAlpha   1e-6;
+
+}
+water
+{
+    type            pureIsothermalPhaseModel;
+    diameterModel   none;
+    residualAlpha   1e-6;
+}
+populationBalanceCoeffs
+{
+    bubbles
+    {
+        continuousPhase water;
+
+        coalescenceModels
+        (
+           PB
+           {
+             a        10;
+             C1 0.25;
+             h0 1e-4;
+             hf 1e-8;
+             CEff        2.5;
+             CTurb       1.0;
+             CBuoy       1;
+             CShear      1.0;
+             CEddy        1.0;
+             CWake         1;
+             turbulence    yes  ; 
+             buoyancy      yes  ;   
+             laminarShear  yes  ; 
+             eddyCapture   no  ;
+             wakeEntrainment     yes  ;
+           }
+        );
+
+        binaryBreakupModels
+        (
+        );
+
+        breakupModels
+        (
+        );
+            
+        driftModels
+        (
+            densityChange{}
+        );
+
+        nucleationModels
+        ();
+    }
+}
+
+blending
+{
+    default
+    {
+        type            continuous;
+        phase           water;
+    }
+}
+
+
+
+surfaceTension
+{
+    air_water
+    {
+        type            constant;
+        sigma           0.068;
+    }
+
+}
+
+
+drag
+{
+    air_dispersedIn_water
+    {
+        
+        type            IshiiZuber;
+        residualRe      1e-3;
+        residualMo      1e-3;
+        residualE      0.5;
+        swarmCorrection
+        {
+            type        none;
+        }
+        aspectRatio
+        {
+            type Liu;
+        }
+
+    }
+}
+
+
+
+virtualMass
+{
+    air_dispersedIn_water
+    {
+        type            constantCoefficient;
+        Cvm             0.5;
+    }
+}
+
+
+
+heatTransfer
+{
+}
+
+
+
+phaseTransfer
+{
+    
+}
+
+
+
+lift
+{
+    air_dispersedIn_water
+    {
+        type Tomiyama;
+        aspectRatio
+        {
+            type Liu;
+        }
+    }
+
+}
+
+
+wallLubrication
+{
+    air_dispersedIn_water
+    {
+        type    Hosokawa;
+    }
+}
+
+
+
+turbulentDispersion
+{
+    air_dispersedIn_water
+    {
+        type                Burns;
+        sigma               0.9;
+    }
+}
+
+
+
+interfaceCompression
+{
+    
+}
+
+// ************************************************************************* //
