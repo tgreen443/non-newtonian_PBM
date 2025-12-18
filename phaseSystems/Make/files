@@ -1,0 +1,6 @@
+
+
+populationBalanceModel/coalescenceModels/PB/PB.C
+populationBalanceModel/breakupModels/LiaoNBase.C
+populationBalanceModel/breakupModels/LiaoN.C
+LIB = $(FOAM_USER_LIBBIN)/libaddonPhaseSystem
