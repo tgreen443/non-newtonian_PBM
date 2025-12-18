@@ -9,6 +9,8 @@ Key feature: Implementation of a bubble coalescence model in the population bala
 
 Compile and run in **OpenFOAM10**
 
+solver :multiphaseEulerFoam
+
 ## Citation
 
 If this code or associated model helps your research, please cite our related work published in Physics of Fluids:
