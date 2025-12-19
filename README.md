@@ -15,7 +15,7 @@ solver :multiphaseEulerFoam
 
 If this code or associated model helps your research, please cite our related work published in Physics of Fluids:
 
-**DOI**:
+**DOI**:10.1063/5.0303266
 
 **Full reference**:
 
