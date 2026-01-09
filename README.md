@@ -17,7 +17,7 @@ If this code or associated model helps your research, please cite our related wo
 
 **DOI**:10.1063/5.0303266
 
-**Full reference**:
+**Full reference**:Xiaokai Yang, Dawei Qu, Tianyuan Xia, Yongfeng Liu; Simulation of bubbly flow in non-Newtonian fluids using computational fluid dynamics and population balance model based on the entire turbulent energy spectrum. Physics of Fluids 1 January 2026; 38 (1): 013104. https://doi.org/10.1063/5.0303266
 
 ## Contact
 
